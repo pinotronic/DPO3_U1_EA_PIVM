@@ -15,9 +15,9 @@ public class EvidenciaApredizajeU1 extends JFrame implements ActionListener{
 
     private JPanel Panelmenu;
     private int size_x = 640, size_y = 500;
-    JLabel LBLNombreAlumno, LBLMatricula, LBLTitulo;
+    JLabel LBLNombreAlumno, LBLMatricula, LBLTitulo,LBLnumEmpleado,LBLnombreTrabajador ,LBLrfc ;
     JButton BTNCrearArchivo, BTNAbrirArchivo, BTNGuardarArchivo, BTNEliminarArchivo;
-    JTextField TextNombreArchivo;
+    JTextField TextNombreArchivo,TXTNumEmpleado,TXTNombre,TXTRfc  ;
     public boolean abrioArchivo = false;
     public boolean creoNuevo = false;
     
@@ -38,17 +38,44 @@ public class EvidenciaApredizajeU1 extends JFrame implements ActionListener{
          
     }
 
-   
     public void GUI2() {
         Panelmenu = new JPanel();
+        Panelmenu.setBackground(Color.darkGray);
 
         LBLTitulo = new JLabel("Manejador de Archivo de Texto. Evidencia de Aprendizaje");
         LBLTitulo.setBounds(130, 10, 400, 20);
         Panelmenu.add(LBLTitulo);
 
         JTextArea JtextTexto = new JTextArea();
-        JtextTexto.setBounds(10, 40, 450, 380);
+        JtextTexto.setBounds(10, 100, 450, 280);
         Panelmenu.add(JtextTexto);
+
+        LBLnumEmpleado = new JLabel("No. Empleado");// se crea la etiqueta
+        LBLnumEmpleado.setForeground(Color.white);
+        LBLnumEmpleado.setBounds(150, 70, 80, 20); //se da dimension y colocacion
+        Panelmenu.add(LBLnumEmpleado);// se agrega a la ventana
+        
+        TXTNumEmpleado = new JTextField("No. Empleado");// se crea la etiqueta
+        TXTNumEmpleado.setBounds(250, 70, 80, 20); //se da dimension y colocacion
+        Panelmenu.add(TXTNumEmpleado);// se agrega a la ventana
+
+        LBLnombreTrabajador = new JLabel("Nombre");// se crea la etiqueta
+        LBLnombreTrabajador.setForeground(Color.white);
+        LBLnombreTrabajador.setBounds(150, 30, 50, 20); //se da dimension y colocacion
+        Panelmenu.add(LBLnombreTrabajador);// se agrega a la ventana
+
+        TXTNombre = new JTextField("Nombre");// se crea la etiqueta
+        TXTNombre.setBounds(250, 30, 220, 20); //se da dimension y colocacion
+        Panelmenu.add(TXTNombre);// se agrega a la ventana
+
+        TXTRfc = new JTextField("RFC");// se crea la etiqueta
+        TXTRfc.setBounds(250, 50, 80, 20); //se da dimension y colocacion
+        Panelmenu.add(TXTRfc);// se agrega a la ventana
+
+        LBLrfc = new JLabel("RFC");// se crea la etiqueta
+        LBLrfc.setForeground(Color.white);
+        LBLrfc.setBounds(150, 50, 30, 20); //se da dimension y colocacion
+        Panelmenu.add(LBLrfc);// se agrega a la ventana
 
         LBLNombreAlumno = new JLabel("Pino Martin Vargas Marquez.");
         LBLNombreAlumno.setBounds(150, 440, 180, 20);
@@ -86,8 +113,6 @@ public class EvidenciaApredizajeU1 extends JFrame implements ActionListener{
         this.getContentPane().add(Panelmenu);
         Panelmenu.setVisible(true);
         Panelmenu.setBorder(BorderFactory.createLineBorder(Color.red, 1));
-        
-
         
         BTNCrearArchivo.addActionListener(new ActionListener() {
             @Override
@@ -137,16 +162,21 @@ public class EvidenciaApredizajeU1 extends JFrame implements ActionListener{
             }
 
         });
-               
 
         BTNGuardarArchivo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 ManejoArchivos cargaArchivo = new ManejoArchivos();
-
-                String Texto;
                 String Texto2;
-                Texto = JtextTexto.getText();
+                String Texto;
+                String numeroEmpleado;
+                String nombre;
+                String rfc;
+                String direccionDirectorio="c:\\tarea\\Nomina.txt";
+                numeroEmpleado = TXTNumEmpleado.getText();
+                nombre = TXTNombre.getText();
+                rfc = TXTRfc.getText();
+                Texto = "# Empleado: "+ numeroEmpleado+ " Nombre: " + nombre  + " RFC: "+ rfc + "\n" ;
                 Texto2 = TextNombreArchivo.getText();
                 cargaArchivo.GuardarFichero(Texto, Texto2);
                 JOptionPane.showMessageDialog(Panelmenu,"Archivo Guardado o actualizado el Archivo"+ ManejoArchivos.ruta);
@@ -157,8 +187,6 @@ public class EvidenciaApredizajeU1 extends JFrame implements ActionListener{
             }
 
         });              
-
-        
         
         BTNEliminarArchivo.addActionListener(new ActionListener() {
             @Override
@@ -174,14 +202,7 @@ public class EvidenciaApredizajeU1 extends JFrame implements ActionListener{
             }
 
         });        
-        
-        
-        
-        
-        
-        
-               
-    
+
     }
 
     @Override
